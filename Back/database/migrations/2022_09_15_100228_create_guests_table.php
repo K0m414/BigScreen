@@ -13,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
+        // Create guests table
         Schema::create('guests', function (Blueprint $table) {
             $table->id();
+            $table->string('email', 255);
+            $table->string('link', 255);
             $table->timestamps();
         });
     }

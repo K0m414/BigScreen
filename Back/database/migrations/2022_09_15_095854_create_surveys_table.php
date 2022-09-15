@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
+        //Create surveys table
         Schema::create('surveys', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 255);
             $table->timestamps();
         });
     }
