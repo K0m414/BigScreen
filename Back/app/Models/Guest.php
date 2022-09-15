@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Guest extends Model
 {
     use HasFactory;
+    // many answers belongs to one guest
+    public function answer()
+    {
+        //create the relation many to one 
+        return $this->belongsTo(Answer::class);
+    }
 }

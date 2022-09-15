@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Question extends Model
 {
     use HasFactory;
+    // many questions has one survey  
+    public function survey()
+    {
+        //create the relation many to one 
+        return $this->hasMany(Survey::class);
+    }
+
+    // many answers belongs to one question
+        public function answer()
+    {
+        //create the relation many to one 
+        return $this->belongsTo(Answer::class);
+    }
 }
