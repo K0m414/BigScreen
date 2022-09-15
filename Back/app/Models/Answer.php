@@ -18,7 +18,7 @@ class Answer extends Model
     public function guest()
     {
         //create the relation one to many 
-        return $this->hasMany(GuestUser::class);
+        return $this->hasMany(Guest::class);
     }
 
 }
