@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Answer extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['answer', "question_id", "guest_id"];
+
     //one quetion has many answers
     public function question()
     {

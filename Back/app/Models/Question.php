@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Question extends Model
 {
     use HasFactory;
+
+    protected $fillable = [ "question","question_type", "answer_choice", "survey_id"];
+
     // many questions has one survey  
     public function survey()
     {

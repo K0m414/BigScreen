@@ -9,6 +9,8 @@ class Survey extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name'];
+
     // one survey belongs to many questions  
     public function question()
     {
