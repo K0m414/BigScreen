@@ -15,6 +15,5 @@ class GuestTableSeeder extends Seeder
      */
     public function run()
     {
-        
     }
 }
