@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Answer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Models\Guest;
 
 class AnswerController extends Controller
 {
@@ -44,18 +45,45 @@ class AnswerController extends Controller
      */
     public function store(Request $request)
     {
-       
-        $guest =$request->all();
+        // $this->validate($request, [
+        //     'email'=> 'required|email',
+        // ]);
+        // search the email from the request
+        $guestEmail = implode('"email" =>', $request->only(['email'])) ;
+        //with the email find the id
+        $guestId = Guest::all()->where("email", $guestEmail)->pluck("id")->implode('0 => ', );
+        //create a unique id
         $link = Str::uuid()->toString();
-        dd($guest);
-        // $answer = Answer::create($request->all());
-        // dd($request->all());
-        // return response()->json([
-        //     'status' => true,
-        //     'message'=>"ok",
-        //     'answer' => $answer
-        // ],200);
+
+        // if the id is find
+        if($guestId){
+            //then create an answer in the answer table
+            $answer = Answer::create([
+                'answer' => $request->answer,
+                'question_id' => $request->question_id,
+                'guest_id' => $guestId,
+            ]);
+        }
+        //the id is null 
+        else{
+            // create a guest
+            $guest = Guest::create([
+                'email' => $request->email,
+                'link' => $link,
+            ]);
+            // search the new guest id
+            $guestId = Guest::all()->where("email", $guestEmail)->pluck("id")->implode('0 => ', );
+            // dd($guestId);
+            //then create an answer in the answer table
+            $answer = Answer::create([
+                'answer' => $request->answer,
+                'question_id' => $request->question_id,
+                'guest_id' => $guestId,
+            ]);
+        }
+        
     }
+    
 
     /**
      * Display the specified resource.
