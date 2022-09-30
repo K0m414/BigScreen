@@ -19,7 +19,7 @@
     }
     </script> -->
 
-    <script setup>
+<script setup>
 import SurveyForm from "@/components/guest/SurveyForm.vue";
 </script>
 
