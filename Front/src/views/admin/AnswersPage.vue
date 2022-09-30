@@ -5,15 +5,15 @@
     
     
     <script> 
-    export default {
-        name: "AnswerPage",
-        data() {
-            return {
-               
-                answer: "",
-                question_id: "",
-                guest_id: ""
+        export default {
+            name: "HomePage",
+            data() {
+                return {
+        
+                    answer: "",
+                    question_id: "",
+                    guest_id: ""
+                }
             }
         }
-    }
-    </script>
+        </script>
