@@ -1,6 +1,6 @@
 <template>
-    <h1>BigScreen</h1><br>
         <div class="register">
+            <h1>BigScreen</h1><br>
             <input type="email" v-model="email" placeholder="adresse e-mail">
             <input type="password" v-model="password" placeholder="Mot de passe">
             <button v-on:click="signIn">Connexion</button>
