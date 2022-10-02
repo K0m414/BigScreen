@@ -11,14 +11,12 @@ const routes = [
 
   // routes admin
   {
-
     name: "SignIn",
     component: SignIn,
     path: "/signin"
   },
 
   {
-
     name: "HomePage",
     component: HomePage,
     path: "/homepage"
