@@ -33,8 +33,8 @@
                     <td>type de question</td>
                 </th>
             </thead>
-            <tbody v-for="question in this.questionData">
-                <tr>
+            <tbody>
+                <tr v-for="question in this.questionData">
                     <td>{{question.question}}</td>
                     <td>{{question.answer_choice}}</td>
                     <td>{{question.question_type}}</td>
