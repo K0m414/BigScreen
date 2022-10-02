@@ -52,8 +52,9 @@ class AnswerController extends Controller
         $guestEmail = implode('"email" =>', $request->only(['email'])) ;
         //with the email find the id
         $guestId = Guest::all()->where("email", $guestEmail)->pluck("id")->implode('0 => ', );
+        $link = Guest::all()->where("email", $guestEmail)->pluck("link")->implode('0 => ', );
+
         //create a unique id
-        $link = Str::uuid()->toString();
 
         // if the id is find
         if($guestId){
@@ -63,9 +64,19 @@ class AnswerController extends Controller
                 'question_id' => $request->question_id,
                 'guest_id' => $guestId,
             ]);
+            return response()->json([
+                'status' => true,
+                'message'=>"Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
+                votre investissement, nous vous préparons une application toujours plus
+                facile à utiliser, seul ou en famille. <br>
+                Si vous désirez consulter vos réponse ultérieurement, vous pouvez consultez
+                cette adresse:",
+                'link'=> $link,
+            ],200); 
         }
         //the id is null 
         else{
+            $link = Str::uuid()->toString();
             // create a guest
             $guest = Guest::create([
                 'email' => $request->email,
@@ -80,12 +91,26 @@ class AnswerController extends Controller
                 'question_id' => $request->question_id,
                 'guest_id' => $guestId,
             ]);
+
+            return response()->json([
+                'status' => true,
+                'message'=>"Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
+                votre investissement, nous vous préparons une application toujours plus
+                facile à utiliser, seul ou en famille. <br>
+                Si vous désirez consulter vos réponse ultérieurement, vous pouvez consultez
+                cette adresse:",
+                'link'=> $link,
+            ],200); 
+
+                            
+
         }
         
     }
     
 
     /**
+     * 
      * Display the specified resource.
      *
      * @param  \App\Models\Answer  $answer
