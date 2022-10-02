@@ -1,18 +1,9 @@
-<template> 
-<h1>connexion admin</h1>
-
-</template>
-
-
-<script> 
-export default {
-    name: "SignIn",
-    data() {
-        return {
-           
-            email: "",
-            password: ""
-        }
-    }
-}
+<script setup>
+    import LoginForm from "@/components/admin/LoginForm.vue";
 </script>
+
+<template>
+    <main>
+    <LoginForm />
+    </main>
+</template>
