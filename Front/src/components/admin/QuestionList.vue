@@ -1,0 +1,52 @@
+<script>
+    import axios from "axios";
+    
+    const questionsURL = `http://127.0.0.1:8000/api/questions`
+    
+    export default {
+        data(){
+            return{
+                questionData  : [], // push questions from db
+                dataState:"", // state of data for display
+            }
+        },
+        mounted() { // call when the page is loaded
+            axios.get(questionsURL) // get datas from db
+            .then((response) => { // datas get is in response
+                this.questionData = response.data.questions; // put response in questionData
+                this.dataState = true; // if datas is return from db then it will be true
+            })
+            .catch((error) => { // catch error
+                console.log(error); // display error in console
+                this.dataState = false; // if error is return from db then it will be false
+            });
+        },
+    }
+    </script>
+    <template>
+    <div>
+        <table v-if="this.dataState">
+            <thead>
+                <th>
+                    <td>question</td>
+                    <td>reponse possible</td>
+                    <td>type de question</td>
+                </th>
+            </thead>
+            <tbody v-for="question in this.questionData">
+                <tr>
+                    <td>{{question.question}}</td>
+                    <td>{{question.answer_choice}}</td>
+                    <td>{{question.question_type}}</td>
+                </tr>
+            </tbody>    
+        </table>
+        <div v-if="this.dataState === false">
+            <p>
+                Oups ! il y une erreur !
+                Veuillez rafraichir la page ou réessayer plus tard.
+            </p>
+        </div>
+        
+    </div>
+    </template>

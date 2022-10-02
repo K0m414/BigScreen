@@ -35,7 +35,7 @@ export default {
             if(result.status==201) {
               localStorage.setItem("user-token",result.data.token)
             //   redirection de la page home apres connexion
-            window.location.href = 'http://127.0.0.1:8000/'
+            window.location.href = 'http://127.0.0.1:5173/homepage'
             //   this.$router.push({name:'ViewPair'})
             }
         }
