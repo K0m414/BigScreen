@@ -23,8 +23,8 @@
         </h1>
     
         <SidebarLink to="/homepage" icon="fas fa-home">Acceuil</SidebarLink>
-        <SidebarLink to="/" icon="fas fa-columns">Questionnaire</SidebarLink>
-        <SidebarLink to="/answerpage" icon="fas fa-chart-bar">Reponses</SidebarLink>
+        <SidebarLink to="/questionspage" icon="fas fa-columns">Questionnaire</SidebarLink>
+        <SidebarLink to="/answerspage" icon="fas fa-chart-bar">Reponses</SidebarLink>
         
 
     

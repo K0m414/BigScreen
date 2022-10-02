@@ -1,18 +1,9 @@
-<!-- <template> 
-  <h1>Cette page affiche les statistiques du sondage.</h1>
-  
-  </template>
-  
-  
-  <script> 
-  export default {
-      name: "HomePage",
-      data() {
-          return {
-             
-              answer: "",
-              question_id: "",
-              guest_id: ""
-          }
-      }
-  } -->
+<script setup>
+    import SidebarPage from "@/components/layouts/SidebarPage.vue";
+</script>
+
+<template>
+    <main>
+    <SidebarPage />
+    </main>
+</template>
