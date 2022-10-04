@@ -119,12 +119,12 @@ class AnswerController extends Controller
     public function show($id)
     {
         $answer = Answer::find($id);
-        dd($answer);
-        // return response()->json([
-        //     'status' => true,
-        //     'message'=>"ok",
-        //     'answer'=> $answer
-        // ],200); 
+        // dd($answer);
+        return response()->json([
+            'status' => true,
+            'message'=>"ok",
+            'answer'=> $answer
+        ],200); 
     }
 
     /**

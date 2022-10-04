@@ -14,55 +14,64 @@
             return{
                 data  : {
                     answers: [],
+                    question_id :[],
                     questions: [],
                     guest : [],
                 }, // put datas from db
-                dataState:"", // state of data for display
+                dataState:false, // state of data for display
             }
         },
         mounted() { // call when the page is loaded
             axios.all([requestOne, requestTwo, requestThree])
             .then(axios.spread((...responses) => {
-            this.data.questions =  responses[0].data.questions;
-            this.data.answers =  responses[1].data.answers;
-            this.data.guest =  responses[2].data.guests;
+                this.data.questions =  responses[0].data.questions;
+                this.data.answers =  responses[1].data.answers;
+                // this.data.question_id = this.getQuestionId(this.data.answers);
+                this.data.guest =  responses[2].data.guests;
 
-            console.log(this.data.guest[0].email);
+                // for (let index = 0; index < this.data.question_id.length; index++) {
+                //     const element = this.data.questions[this.data.question_id[index]].question;
+                //     // console.log(element);
+                // }
 
-            this.dataState = true; // if datas is return from db then it will be true
+                this.dataState = true; // if datas is return from db then it will be true
             
-        }))
-        .catch((error) => { // catch error
-            console.log(error); // display error in console
-            this.dataState = false; // if error is return from db then it will be false
-        });
+            }))
+            .catch((error) => { // catch error
+                console.log(error); // display error in console
+                this.dataState = false; // if error is return from db then it will be false
+            });
         },
+        methods: {
+            getQuestionId(data ){
+                let arr = [];
+                for (let index = 0; index < data.length; index++) {
+                    arr.push(data[index].question_id);
+                }
+                return arr;
+            },
+        }
     }
     </script>
     <template>
     <div>
-        <table v-if="this.dataState" v-for="(answer, question, index) in this.data.answers">
+        <table v-if="this.dataState">
             <thead>
                 <th>
-                    <td>{{answer.guest_id}}</td>
-                    <td>{{this.data.guest[0].email}}</td>
-                    <!-- <td>{{answer.guest_id}}</td> -->
-                </th>
-            </thead>
-            <tbody >
-                <tr>
+                    <tr>
+                    <td>email</td>
                     <td>numero de question</td>
                     <td>question</td>
                     <td>reponse</td>
                 </tr>
-                <tr>
-                    <!-- <td>{{answer.question_id}}</td>
-                    <td>{{answer.question_id}}</td> -->
+                </th>
+            </thead>
+            <tbody >
+                <tr v-for="answer in this.data.answers">
+                    <td>{{this.data.guest[answer.guest_id - 1].email}}</td>
+                    <td>Question N°{{answer.question_id}}</td>
+                    <td>{{this.data.questions[answer.question_id - 1 ].question}}</td>
                     <td>{{answer.answer}}</td>
-                    <!-- <td>{{index}}</td> -->
-
-                    <!-- <td>{{this.data.questions[index].question}}</td> -->
-                    <!-- <td>{{answer}}</td> -->
                 </tr>
             </tbody>    
         </table>
