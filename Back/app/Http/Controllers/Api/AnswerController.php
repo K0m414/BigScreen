@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Answer;
+use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Guest;
@@ -100,22 +101,11 @@ class AnswerController extends Controller
                 Si vous désirez consulter vos réponse ultérieurement, vous pouvez consultez
                 cette adresse:",
                 'link'=> $link,
-            ],200); 
-
-                            
+            ],200);              
 
         }
         
     }
-    
-
-    /**
-     * 
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Answer  $answer
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $answer = Answer::find($id);
@@ -126,38 +116,30 @@ class AnswerController extends Controller
             'answer'=> $answer
         ],200); 
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Answer  $answer
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Answer $answer)
+    protected function getDoughnutChart($id)
     {
-        //
+        $answers =Answer::all()->where('question_id', $id)->groupBy('answer'); // all answer where question_id = $id are group by answer
+        $answer_choice = Question::where('id', $id)->get(); // get all choice from question table
+        $labels = explode(", ", $answer_choice[0]->answer_choice);
+        $stats = [];
+        $datas = [];
+        $valueArray = [];
+        $countArray = [];
+
+        foreach ($labels as $key => $value) {
+            if(isset($answers[$value])) { 
+                $count = $answers[$value]->count();        
+                $stats = [$value =>$count];
+                //  print_r($stats);
+
+                array_push( $datas, $stats );
+                array_push( $valueArray, $value );
+                array_push( $countArray, $count );
+
+            }
+        }
+        return [$datas, 'value' =>$valueArray, 'count' =>$countArray];
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Answer  $answer
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Answer $answer)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Answer  $answer
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Answer $answer)
-    {
-        //
-    }
 }

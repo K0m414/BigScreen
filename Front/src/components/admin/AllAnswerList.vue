@@ -66,7 +66,7 @@
                 </tr>
                 </th>
             </thead>
-            <tbody >
+            <tbody>
                 <tr v-for="answer in this.data.answers">
                     <td>{{this.data.guest[answer.guest_id - 1].email}}</td>
                     <td>Question N°{{answer.question_id}}</td>

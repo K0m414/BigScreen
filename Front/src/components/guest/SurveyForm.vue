@@ -1,7 +1,6 @@
 <script>
 import axios from "axios";
-import { useVuelidate } from '@vuelidate/core'
-import { required, email } from '@vuelidate/validators' 
+
 const questionsURL = "http://127.0.0.1:8000/api/questions";
 const answersURL = "http://127.0.0.1:8000/api/answers";
 
@@ -16,7 +15,6 @@ export default {
             dataState:"", // state of data for display
         }
     },
-    
     mounted() { // call when the page is loaded
         axios.get(questionsURL) // get datas from db
         .then((response) => { // datas get is in response
@@ -40,7 +38,6 @@ export default {
                     }
                 axios.post(answersURL, data ) // send data to db
                 .then((response) => {
-                    
                     console.log(response); // action to do if data is send succesfully
                 })
                 .catch((error) => {
