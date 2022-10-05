@@ -1,12 +1,17 @@
 <script>
     import axios from "axios";
     
-    const questionsURL = `http://127.0.0.1:8000/api/questions`
+    const questionsURL = "http://127.0.0.1:8000/api/questions";
+    const answersURL = "http://127.0.0.1:8000/api/answers";
+    
+    let data;
     
     export default {
         data(){
             return{
                 questionData  : [], // push questions from db
+                answerData : [], // push answers from guest
+                guestData:"", // guest email
                 dataState:"", // state of data for display
             }
         },
@@ -17,30 +22,66 @@
                 this.dataState = true; // if datas is return from db then it will be true
             })
             .catch((error) => { // catch error
-                console.log(error); // display error in console
+                console.log(error.response.data); // display error in console
                 this.dataState = false; // if error is return from db then it will be false
             });
+        },
+        methods: {
+            // function activate when the form is submit
+            submitForm() {
+                // answers are put in answerData with v-model in the from 
+                this.answerData.forEach((answer, index) => { // use foreach to loop the answers
+                        data = {
+                            'answer': answer, 
+                            "question_id":index+1, 
+                            "email":this.guestData // use v-model in the form to get email
+                        }
+                    axios.post(answersURL, data ) // send data to db
+                    .then((response) => {
+                        console.log(response); // action to do if data is send succesfully
+                    })
+                    .catch((error) => {
+                        console.log(error); // display error in console
+                    });
+                });   
+            },
         },
     }
     </script>
     <template>
     <div>
-        <table v-if="this.dataState">
-            <thead>
-                <th>
-                    <td>question</td>
-                    <td>reponse possible</td>
-                    <td>type de question</td>
-                </th>
-            </thead>
-            <tbody>
-                <tr v-for="question in this.questionData">
-                    <td>{{question.question}}</td>
-                    <td>{{question.answer_choice}}</td>
-                    <td>{{question.question_type}}</td>
-                </tr>
-            </tbody>    
-        </table>
+        <form  v-if="this.dataState"  action="" class="mt-6">
+            <fieldset>
+                <legend>Formulaire de sondage</legend>
+    
+                <div v-for="(question, index) in this.questionData" :key="index">
+                    <div v-if="question.id == 1" >
+                        <div class="d-grid gap-2">
+                        <label  :for='"question-"+question.id' class="form-label mt-3 text-bg-primary mb-2">{{question.question}} {{question.id}}/20</label>
+                        </div>
+                        <input v-model="guestData" :id='"question-"+question.id' class="form-control" />
+                    </div>
+                    <label v-if="question.id !== 1" :for='"question-"+question.id'  >{{question.question}} {{question.id}}/20</label>
+                    <div v-if="question.question_type == 'A'">
+                        <select v-model="answerData[index]" :name="question.id" class="form-select" aria-label="Default select example">
+                            <option  v-for="answer in question.answer_choice.split(',')" :value="answer" >
+                                {{ answer }}
+                            </option>
+                        </select>
+                    </div>
+                    <div v-if="question.question_type == 'B'">
+                        <input v-if="question.id !== 1" v-model="answerData[index]" :id='"question-"+question.id' class="form-control"/>
+                    </div>
+                    <div v-if="question.question_type == 'C'" v-for="answer in question.answer_choice.split(',')" class="form-check form-check-inline" >
+                        <input v-model="answerData[index]" type="radio" :value="answer" :name="'question-'+question.id+'-anwer-'+answer"  class="form-check-input"/>
+                        <label :for="'question-'+question.id+'-anwer-'+answer" class="form-check-label">{{ answer }}</label>
+                    </div>
+                </div>
+                <div class="d-grid gap-2">
+                <button @click.prevent="submitForm" class="btn btn-primary mt-3">Envoyer les résultats</button>
+                </div>
+            </fieldset>
+        </form>
         <div v-if="this.dataState === false">
             <p>
                 Oups ! il y une erreur !
