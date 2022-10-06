@@ -2,22 +2,37 @@
     import Chart from 'chart.js/auto'
     import axios from "axios";
     
-    const answersURL = "http://127.0.0.1:8000/api/doughnutChart/6";
+    const answersURL = "http://127.0.0.1:8000/api/doughnutChart/";
     let dataCount = [];
     let dataLabel = []
+    // defineProps({
+    //   id: {
+    //     type: String,
+    //     required: true,
+    //   },
+    // });
     export default {
-      name: ' Doughnut',
+      name: ' DoughnutChart',
+      props: {
+        id: {
+          type: Number,
+          required: true,
+        },
+      },
       data(){
             return{
                 dataState:"", // state of data for display
                 data : {
                   value :[],
                   count : []
-                }
+                },
+                canvaId:'myChartDougnut-'+this.id
             }
         },
       mounted(){
-        this.getData(answersURL)
+      // console.log(this.canvaId)
+
+        this.getData(answersURL+this.id)
       },
       methods: {
         getData(url){
@@ -44,7 +59,7 @@
           });
         },
         getChartDoughnut(doughnutData, name){
-          const ctx = document.getElementById('myChartDougnut');
+          const ctx = document.getElementById(this.canvaId);
           const data = {
           labels: name,
           datasets: [{
@@ -72,7 +87,7 @@
     </script>
     <template>
       <div>
-        <canvas id="myChartDougnut"></canvas>
+        <canvas :id=this.canvaId></canvas>
       </div>
       
       </template>
