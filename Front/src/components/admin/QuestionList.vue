@@ -52,7 +52,7 @@
     </div>
     </template>
 
-    <!-- <style>
+    <style>
         .table{ 
             width:150%;
             margin-bottom:20px;
@@ -65,4 +65,4 @@
         margin-left:100px;
         margin-right:50px;
     }
-    </style> -->
+    </style>
