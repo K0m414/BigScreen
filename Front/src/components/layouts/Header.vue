@@ -17,7 +17,10 @@
         background-color: #3772ff;
         overflow: hidden;
         width: 200%;
+        height: 50px;
         margin-bottom: 50px;
+        padding:10px;
+
 
     }
     .nav h1 {
