@@ -89,16 +89,13 @@
 
 <style>
     .table{ 
-        width:200%;
-        height: 100%;
+        width:150%;
         margin-top:20px;
-        margin-left:100px;
-        margin-right:50px;
+        margin-left:200px;
         
     }
     h3{
         width:100%;
-        margin-left:100px;
-        margin-right:50px;
+        margin-left:200px;
     }
 </style>
