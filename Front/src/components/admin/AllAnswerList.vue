@@ -55,23 +55,25 @@
     </script>
     <template>
     <div>
-        <table v-if="this.dataState">
+        <h3> La liste de toutes les reponses du sondage</h3>
+        <table v-if="this.dataState" class="table table-bordered table-striped" >
             <thead>
-                <th>
-                    <tr>
-                    <td>email</td>
-                    <td>numero de question</td>
-                    <td>question</td>
-                    <td>reponse</td>
+                <tr>
+                    <th  scope="col">email</th>
+                    <th  scope="col">numero de question</th>
+                    <th  scope="col">question</th>
+                    <th  scope="col">reponse</th>
                 </tr>
-                </th>
             </thead>
             <tbody>
                 <tr v-for="answer in this.data.answers">
-                    <td>{{this.data.guest[answer.guest_id - 1].email}}</td>
-                    <td>Question N°{{answer.question_id}}</td>
-                    <td>{{this.data.questions[answer.question_id - 1 ].question}}</td>
-                    <td>{{answer.answer}}</td>
+                  
+                  
+                    <th scope="row">{{this.data.guest[answer.guest_id - 1].email}}</th>
+                    <th scope="row">Question N°{{answer.question_id}}</th >
+                    <th scope="row">{{this.data.questions[answer.question_id - 1 ].question}}</th >
+                    <th scope="row">{{answer.answer}}</th>
+                 
                 </tr>
             </tbody>    
         </table>
@@ -84,3 +86,19 @@
         
     </div>
     </template>
+
+<style>
+    .table{ 
+        width:200%;
+        height: 100%;
+        margin-top:20px;
+        margin-left:100px;
+        margin-right:50px;
+        
+    }
+    h3{
+        width:100%;
+        margin-left:100px;
+        margin-right:50px;
+    }
+</style>

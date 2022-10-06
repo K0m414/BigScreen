@@ -24,11 +24,12 @@
     }
     </script>
     <template>
-    <div class="">
+    <div>
+        <h3> La liste des 20 questions du sondage</h3>
         <table v-if="this.dataState" class="table table-bordered table-striped" >
             <thead>
                 <tr>
-                    <th scope="col">question</th>
+                    <th scope="col" :style="{'color':blue}" >question</th>
                     <th scope="col">reponse possible</th>
                     <th scope="col">type</th>
                 </tr>
@@ -53,10 +54,15 @@
 
     <style>
         .table{ 
-            width:100%;
-            height: 200px;
+            width:150%;
             margin-bottom:20px;
             margin-left:100px;
             margin-right:50px;
         }
+
+        h3{
+        width:100%;
+        margin-left:100px;
+        margin-right:50px;
+    }
     </style>
