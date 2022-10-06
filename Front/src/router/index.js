@@ -50,7 +50,7 @@ const routes = [
 
     name: "AnswerPage",
     component: AnswerPage,
-    path: "/answerpage"
+    path: "/answerpage/:link"
   },
 
 

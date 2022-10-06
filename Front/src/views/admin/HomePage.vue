@@ -1,13 +1,17 @@
 <script setup>
     import SidebarPage from "@/components/layouts/SidebarPage.vue";
-    import ChartQuestionSix from "@/components/admin/HomePage.vue";
+    import DoughnutChart from "@/components/admin/DoughnutChart.vue";
+    import RadarChart from "@/components/admin/RadarChart.vue";
+
+    
 
 </script>
 
 <template>
     <main>
     <SidebarPage />
-    <ChartQuestionSix />
+    <RadarChart />
+    <DoughnutChart />
 
     </main>
 </template>
