@@ -118,28 +118,39 @@ class AnswerController extends Controller
     }
     protected function getDoughnutChart($id)
     {
+        // check if id = question type a
         $answers =Answer::all()->where('question_id', $id)->groupBy('answer'); // all answer where question_id = $id are group by answer
         $answer_choice = Question::where('id', $id)->get(); // get all choice from question table
         $labels = explode(", ", $answer_choice[0]->answer_choice);
-        $stats = [];
-        $datas = [];
-        $valueArray = [];
+        $labelArray = [];
         $countArray = [];
 
         foreach ($labels as $key => $value) {
             if(isset($answers[$value])) { 
                 $count = $answers[$value]->count();        
-                $stats = [$value =>$count];
-                //  print_r($stats);
-
-                array_push( $datas, $stats );
-                array_push( $valueArray, $value );
+                array_push( $labelArray, $value );
                 array_push( $countArray, $count );
 
             }
         }
-        return [$datas, 'value' =>$valueArray, 'count' =>$countArray];
+        return ['value' =>$labelArray, 'count' =>$countArray];
     }
+    public function GetRadarChart() {
 
+        $question_id =[11,12,13,14,15];
+        $countArray = [];
+        $labelArray = [];
+
+        foreach ($question_id as $id) {
+            $answer = round(Answer::where('question_id', $id)->get()->avg('answer'),2);
+            $questions = Question::all()->where('id', $id)->pluck('question')->implode('0 => ', ); // get all choice from question table
+            array_push($countArray, $answer);
+            array_push($labelArray, $questions);
+
+        }
+        // dd($labelArray);
+
+        return ['value' =>$labelArray, 'count' =>$countArray];
+    }
 
 }
