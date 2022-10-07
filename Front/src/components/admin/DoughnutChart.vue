@@ -86,7 +86,7 @@
     }
     </script>
     <template>
-      <div>
+      <div style="margin: auto 20%;">
         <canvas :id=this.canvaId></canvas>
       </div>
       
