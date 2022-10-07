@@ -52,18 +52,18 @@
     </script>
     <template>
     <div>
-        <form  v-if="this.dataState"  action="" class="mt-6">
-            <fieldset>
-                <legend >Formulaire de sondage</legend>
+        <form  v-if="this.dataState"  action="" class="mt-6 ">
+            <fieldset class="card" >
+                <legend class="card-header">Formulaire de sondage</legend>
     
                 <div v-for="(question, index) in this.questionData" :key="index">
                     <div v-if="question.id == 1" >
-                        <div class="d-grid gap-2">
+                        <div class="d-grid gap-2 mb-3" >
                         <label  :for='"question-"+question.id' class="form-label mt-3 mb-2">{{question.question}} {{question.id}}/20</label>
                         </div>
                         <input v-model="guestData" :id='"question-"+question.id' class="form-control" />
                     </div>
-                    <label v-if="question.id !== 1" :for='"question-"+question.id'  >{{question.question}} {{question.id}}/20</label><br>
+                    <label v-if="question.id !== 1" :for='"question-"+question.id'  class="form-label mt-3 mb-3">{{question.question}} {{question.id}}/20</label><br>
                     <div v-if="question.question_type == 'A'">
                         <select v-model="answerData[index]" :name="question.id" class="form-select" aria-label="Default select example">
                             <option  v-for="answer in question.answer_choice.split(',')" :value="answer" >
@@ -96,13 +96,16 @@
     </template>
 
     <style> 
-    form {
+     form {
         width: 120%;
-        margin-left: 150px;
-        margin-inline: 50px;
+        /* margin-left: 150px;
+        margin-inline: 50px; */
+        /* margin: auto; */
     }
 
     button {
         margin-top: 20px;
+        margin-bottom: 10px;
+        margin-left: 10px;
     }
     </style>
