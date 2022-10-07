@@ -13,6 +13,7 @@
                 answerData : [], // push answers from guest
                 guestData:"", // guest email
                 dataState:"", // state of data for display
+                link:""
             }
         },
         mounted() { // call when the page is loaded
@@ -38,7 +39,8 @@
                         }
                     axios.post(answersURL, data ) // send data to db
                     .then((response) => {
-                        console.log(response); // action to do if data is send succesfully
+                        this.link = 'http://127.0.0.1:5173/answerPage/'+response.data.link
+                        console.log(this.link); // action to do if data is send succesfully
                     })
                     .catch((error) => {
                         console.log(error); // display error in console
@@ -77,8 +79,9 @@
                         <label :for="'question-'+question.id+'-anwer-'+answer" class="form-check-label">{{ answer }}</label>
                     </div>
                 </div>
-                <div >
-                <button @click.prevent="submitForm" class="btn btn-primary ">finaliser</button>
+                <div>
+                    <p v-if="this.link !== ''"><a :href="this.link">voir les réponses</a></p>
+                    <button @click.prevent="submitForm" class="btn btn-primary ">finaliser</button>
                 </div>
             </fieldset>
         </form>

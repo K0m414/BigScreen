@@ -23,8 +23,7 @@
             return{
                 dataState:"", // state of data for display
                 data : {
-                  value :[],
-                  count : []
+                  question : "",
                 },
                 canvaId:'myChartDougnut-'+this.id
             }
@@ -38,11 +37,12 @@
         getData(url){
           axios.get(url) // get datas from db
             .then((response) => {
-              this.data.value = response.data.value
-              this.data.count = response.data.count
-              this.pushIntoArray(this.data.value, dataLabel)
-              this.pushIntoArray(this.data.count, dataCount)
-              this.getChartDoughnut(dataCount,dataLabel)
+              // this.data.value = response.data.value
+              // this.data.question = response.data.question
+              console.log(response.data.question);
+              // this.pushIntoArray(response.data.value, dataLabel)
+              // this.pushIntoArray(response.data.count, dataCount)
+              this.getChartDoughnut(response.data.count,response.data.value, response.data.question)
     
                 this.dataState = true; // if datas is return from db then it will be true
             })
@@ -58,12 +58,12 @@
             store.push(element)
           });
         },
-        getChartDoughnut(doughnutData, name){
+        getChartDoughnut(doughnutData, label,title ){
           const ctx = document.getElementById(this.canvaId);
           const data = {
-          labels: name,
+          labels: label,
           datasets: [{
-            label: 'My First Dataset',
+            label: title,
             data: doughnutData,
             backgroundColor: [
               'rgb(255, 99, 132)',

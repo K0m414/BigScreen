@@ -121,6 +121,7 @@ class AnswerController extends Controller
         // check if id = question type a
         $answers =Answer::all()->where('question_id', $id)->groupBy('answer'); // all answer where question_id = $id are group by answer
         $answer_choice = Question::where('id', $id)->get(); // get all choice from question table
+        $question = Question::where('id', $id)->pluck('question')->implode('0 => ', );
         $labels = explode(", ", $answer_choice[0]->answer_choice);
         $labelArray = [];
         $countArray = [];
@@ -133,7 +134,7 @@ class AnswerController extends Controller
 
             }
         }
-        return ['value' =>$labelArray, 'count' =>$countArray];
+        return ["question"=>$question, 'value' =>$labelArray, 'count' =>$countArray];
     }
     public function GetRadarChart() {
 

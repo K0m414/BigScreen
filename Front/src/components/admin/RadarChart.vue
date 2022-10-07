@@ -8,14 +8,14 @@
   export default {
     name: ' Radar',
     data(){
-          return{
-              dataState:"", // state of data for display
-              data : {
-                value :[],
-                count : []
-              }
+      return{
+          dataState:"", // state of data for display
+          data : {
+            value :[],
+            count : []
           }
-      },
+      }
+    },
     mounted(){
       this.getData(answersURL)
     },
@@ -24,35 +24,28 @@
         axios.get(url) // get datas from db
           .then((response) => {
             console.log(response);
-            this.data.value = response.data.value
-            this.data.count = response.data.count
-            this.pushIntoArray(this.data.value, dataLabel)
-            this.pushIntoArray(this.data.count, dataCount)
-            this.getChartRadar(dataCount,dataLabel)
-  
-              // this.dataState = true; // if datas is return from db then it will be true
+            this.getChartRadar(response.data.count,response.data.value, 'sondage de qualité')
+            this.dataState = true; // if datas is return from db then it will be true
           })
           .catch((error) => { // catch error
              console.log(error)
-              // this.dataState = false; // if error is return from db then it will be false
+            this.dataState = false; // if error is return from db then it will be false
           });
       },
   
-      pushIntoArray(array, store ){
-        array.forEach(element => {
-          // console.log(element);
-          store.push(element)
-        });
-      },
-      getChartRadar( array, label){
+      // pushIntoArray(array, store ){
+      //   array.forEach(element => {
+      //     // console.log(element);
+      //     store.push(element)
+      //   });
+      // },
+      getChartRadar( array, label, title){
         const ctx = document.getElementById('myChartRadar');
         const data = {
-        labels: [
-          "Combien donnez-vous de point pour la qualité de l’image sur Bigscreen ?", "Combien donnez-vous de point pour le confort d’utilisation de l’interface Bigscreen ?", "Combien donnez-vous de point pour la connexion réseau de Bigscreen ?", "Combien donnez-vous de point pour la qualité des graphismes 3D dans Bigscreen ?", "Combien donnez-vous de point pour la qualité audio dans Bigscreen ?"
-        ],
+        labels:label,
         datasets: [{
-          label: 'My First Dataset',
-          data: [ 2.36, 4.18, 3.56, 2.44, 2.78 ],
+          label: title,
+          data: array,
           fill: true,
           backgroundColor: 'rgba(255, 99, 132, 0.2)',
           borderColor: 'rgb(255, 99, 132)',

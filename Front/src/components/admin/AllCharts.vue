@@ -1,5 +1,6 @@
 <script>
     import DoughnutChart from "@/components/admin/DoughnutChart.vue";
+    import RadarChart from "@/components/admin/RadarChart.vue";
 
 export default {
   name: 'AllCharts',
