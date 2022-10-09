@@ -6,11 +6,11 @@
     const questionsURL = `http://127.0.0.1:8000/api/questions`
     const answerURL = "http://127.0.0.1:8000/api/guest/"
     let link = linkURL.replace('http://127.0.0.1:5173/answerPage/','');
-    console.log(answerURL+link);
     export default {
         data(){
             return{
                 data  : {
+                    email : '',
                     answer : '',
                     question_id : '',
                     question : ''
@@ -28,7 +28,6 @@
                 axios.get(URL)
                 .then((response) => { 
                     this.data.question = response.data.questions;
-                    // this.dataState = true;
                 })
                 .catch(errors => {
                     console.log(errors);
@@ -40,6 +39,7 @@
                 .then((response) => { // datas get is in response
                 this.data.answer = response.data.data.answer;
                 this.data.question_id = response.data.data.question;
+                this.data.email = response.data.data.guest_email;
                 this.dataState = true; // if datas is return from db then it will be true
             })
             .catch((error) => { // catch error
@@ -52,14 +52,27 @@
     </script>
     <template>
     <div>
-        <ul v-if="this.dataState">
-            <li>question n° 1/20 {{ this.data.question[0].question }} </li>
-            <li>get user email</li>
-        </ul>
-        <ul v-if="this.dataState" v-for="(answer, index) in this.data.answer">
-            <li>question n° {{ this.data.question_id[index] }}/20 {{ this.data.question[index+1].question }} </li>
-            <li>answer: {{ answer }}</li>            
-        </ul>
+        <table v-if="this.dataState" class="table table-bordered table-striped" >
+            <thead>
+                <tr>
+                    <th scope="col">N° des questions</th>
+                    <th scope="col">Questions</th>
+                    <th scope="col">Réponses</th>
+                </tr>
+            </thead >
+            <tbody>
+                <tr>
+                    <td scope="row">question n° 1/20 </td>
+                    <td scope="row">{{ this.data.question[0].question }}</td>
+                    <td scope="row">{{this.data.email}}</td>
+                </tr>
+                <tr v-if="this.dataState" v-for="(answer, index) in this.data.answer" :key="index">
+                    <td scope="row">question n° {{ this.data.question_id[index] }}/20</td>
+                    <td scope="row">{{ this.data.question[index+1].question }}</td>
+                    <td scope="row">{{ answer }}</td>
+                </tr>
+            </tbody>    
+        </table>
         <div v-if="this.dataState === false">
             <p>
                 Oups ! il y une erreur !

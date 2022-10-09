@@ -29,7 +29,6 @@
                     .then((response) => { // datas get is in response
                         this.questionData = response.data.questions; // put response in questionData
                         this.dataState = true; // if datas is return from db then it will be true
-                        console.log(this.answerData)
                     })
                     .catch((error) => { // catch error
                         console.log(error.response.data); // display error in console
