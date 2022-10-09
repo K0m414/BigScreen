@@ -18,9 +18,8 @@ class SurveyController extends Controller
      */
     public function index()
     {
-        $survey = Survey::all();
         // return all data in survey table
-        // dd($survey);
+        $survey = Survey::all();
         return response()->json([
             'status' => true,
             'surveys'=> $survey,

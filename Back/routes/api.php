@@ -20,6 +20,7 @@ use App\Http\Controllers\Api\GuestController;
 */
 // the routes admin
 Route::post('/auth/login', [AuthController::class, 'login']);
+// route for create users
 Route::post('/auth/register', [AuthController::class, 'register']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

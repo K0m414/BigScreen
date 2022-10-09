@@ -15,10 +15,11 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    // create user in the data base
     public function definition()
     {
         return [
-            'name' => fake()->name(),
+            // 'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password

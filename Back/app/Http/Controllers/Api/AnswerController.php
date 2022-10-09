@@ -23,7 +23,7 @@ class AnswerController extends Controller
         $answer = Answer::all();
        // return all data in answer table
 
-        // dd($answer);
+      
         return response()->json([
             'status' => true,
             'answers'=> $answer,
@@ -48,6 +48,7 @@ class AnswerController extends Controller
      */
     public function store(Request $request)
     {
+        // validate email
         $validator = Validator::make(
 
             $request->all(),

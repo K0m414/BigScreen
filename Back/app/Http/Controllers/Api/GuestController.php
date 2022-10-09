@@ -18,10 +18,8 @@ class GuestController extends Controller
      */
     public function index()
     {
-        $guest = Guest::all();
         // return all data in guest table
-
-        // dd($guest);
+        $guest = Guest::all();
         return response()->json([
             'status' => true,
             'guests'=> $guest,
@@ -34,7 +32,7 @@ class GuestController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-
+// user answer link
     public function show($link)
     { //test id 1 = link 4e3ce2d3-c29e-4f4c-bde9-e164ca799194
         $guest = Guest::all()->where("link", $link); //search guest data with the link
@@ -50,7 +48,6 @@ class GuestController extends Controller
             'data'=> $data,
         ],200);
 
-        // dd($data);
         
     }
 
