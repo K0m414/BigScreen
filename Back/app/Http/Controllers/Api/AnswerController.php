@@ -69,7 +69,7 @@ class AnswerController extends Controller
                 'status' => true,
                 'message'=>"Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
                 votre investissement, nous vous préparons une application toujours plus
-                facile à utiliser, seul ou en famille. <br>
+                facile à utiliser, seul ou en famille.
                 Si vous désirez consulter vos réponse ultérieurement, vous pouvez consultez
                 cette adresse:",
                 'link'=> $link,
@@ -97,7 +97,7 @@ class AnswerController extends Controller
                 'status' => true,
                 'message'=>"Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
                 votre investissement, nous vous préparons une application toujours plus
-                facile à utiliser, seul ou en famille. <br>
+                facile à utiliser, seul ou en famille.
                 Si vous désirez consulter vos réponse ultérieurement, vous pouvez consultez
                 cette adresse:",
                 'link'=> $link,
@@ -116,7 +116,7 @@ class AnswerController extends Controller
             'answer'=> $answer
         ],200); 
     }
-    protected function getDoughnutChart($id)
+    protected function getPieChart($id)
     {
         // check if id = question type a
         $answers =Answer::all()->where('question_id', $id)->groupBy('answer'); // all answer where question_id = $id are group by answer

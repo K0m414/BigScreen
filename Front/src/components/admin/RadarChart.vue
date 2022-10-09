@@ -23,8 +23,7 @@
       getData(url){
         axios.get(url) // get datas from db
           .then((response) => {
-            console.log(response);
-            this.getChartRadar(response.data.count,response.data.value, 'sondage de qualité')
+            this.getChartRadar(response.data.count,response.data.value, 'Sondage de qualité')
             this.dataState = true; // if datas is return from db then it will be true
           })
           .catch((error) => { // catch error
@@ -32,13 +31,6 @@
             this.dataState = false; // if error is return from db then it will be false
           });
       },
-  
-      // pushIntoArray(array, store ){
-      //   array.forEach(element => {
-      //     // console.log(element);
-      //     store.push(element)
-      //   });
-      // },
       getChartRadar( array, label, title){
         const ctx = document.getElementById('myChartRadar');
         const data = {
@@ -55,7 +47,6 @@
           pointHoverBorderColor: 'rgb(255, 99, 132)'
         }]
       };
-        console.log(array)
         const myChartRadar = new Chart(ctx, {
           type: 'radar',
           data: data,
@@ -67,8 +58,6 @@
             }
           },
         });
-          
-        // myChartRadar.destroy();
       }
       
     }
