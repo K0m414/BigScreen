@@ -34,7 +34,7 @@
         <span v-else>BigScreen</span>
       </h1>
   
-      <SidebarLink to="/homepage" icon="fas fa-home">Acceuil</SidebarLink>
+      <SidebarLink to="/homepage" icon="fas fa-home">Accueil</SidebarLink>
       <SidebarLink to="/questionspage" icon="fas fa-columns">Questionnaire</SidebarLink>
       <SidebarLink to="/answerspage" icon="fas fa-chart-bar">Reponses</SidebarLink>
       

@@ -25,20 +25,22 @@
     </script>
     <template>
     <div>
-        <h3> La liste des 20 questions du sondage</h3>
+        <h3>La liste des 20 questions du sondage</h3>
         <table v-if="this.dataState" class="table table-bordered table-striped" >
             <thead>
                 <tr>
-                    <th scope="col" :style="{'color':blue}" >question</th>
-                    <th scope="col">reponse possible</th>
-                    <th scope="col">type</th>
+                    <th scope="col">N° des questions</th>
+                    <th scope="col">Questions</th>
+                    <th scope="col">Réponses possibles</th>
+                    <th scope="col">Types</th>
                 </tr>
             </thead >
             <tbody>
-                <tr v-for="question in this.questionData">
-                    <th scope="row">{{question.question}}</th>
-                    <th scope="row">{{question.answer_choice}}</th>
-                    <th scope="row">{{question.question_type}}</th>
+                <tr v-for="(question, index) in this.questionData" key="index">
+                    <td scope="row">{{question.id}}</td>
+                    <td scope="row">{{question.question}}</td>
+                    <td scope="row">{{question.answer_choice}}</td>
+                    <td scope="row">{{question.question_type}}</td>
                 </tr>
             </tbody>    
         </table>

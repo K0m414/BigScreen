@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import SignIn from '../views/admin/SignIn.vue'
-import HomePage from '../views/admin/HomePage.vue'
-import QuestionsPage from '../views/admin/QuestionsPage.vue'
-import AnswersPage from '../views/admin/AnswersPage.vue'
-import SurveyPage from '../views/guest/SurveyPage.vue'
-import AnswerPage from '../views/guest/AnswerPage.vue'
+import SignIn from '../views/admin/SignInView.vue'
+import HomePage from '../views/admin/HomeView.vue'
+import QuestionsPage from '../views/admin/AllQuestionsView.vue'
+import AnswersPage from '../views/admin/AllAnswersView.vue'
+import SurveyPage from '../views/guest/SurveyView.vue'
+import AnswerPage from '../views/guest/AnswerView.vue'
 
 
 const routes = [
