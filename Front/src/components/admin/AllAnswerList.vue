@@ -93,8 +93,6 @@
                     <td scope="row">Question N°{{response.question_id}}</td>
                     <td scope="row">{{response.question}}</td>
                     <td scope="row">{{response.reponse}}</td>
-
-                 
                 </tr>
             </tbody>    
         </table>
