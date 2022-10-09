@@ -31,5 +31,5 @@ Route::apiResource('answers', AnswerController::class);
 Route::apiResource('surveys', SurveyController::class);
 Route::apiResource('guest', GuestController::class);
 
-Route::get('doughnutChart/{id}',[AnswerController::class,'getDoughnutChart']);
+Route::get('pieChart/{id}',[AnswerController::class,'getPieChart']);
 Route::get('radarChart',[AnswerController::class,'getRadarChart']);

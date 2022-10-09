@@ -2,17 +2,10 @@
     import Chart from 'chart.js/auto'
     import axios from "axios";
     
-    const answersURL = "http://127.0.0.1:8000/api/doughnutChart/";
-    let dataCount = [];
-    let dataLabel = []
-    // defineProps({
-    //   id: {
-    //     type: String,
-    //     required: true,
-    //   },
-    // });
+    const answersURL = "http://127.0.0.1:8000/api/pieChart/";
+
     export default {
-      name: ' DoughnutChart',
+      name: ' pieChart',
       props: {
         id: {
           type: Number,
@@ -25,46 +18,33 @@
                 data : {
                   question : "",
                 },
-                canvaId:'myChartDougnut-'+this.id
+                canvaId:'myChartPie-'+this.id
             }
         },
       mounted(){
-      // console.log(this.canvaId)
-
         this.getData(answersURL+this.id)
       },
       methods: {
         getData(url){
           axios.get(url) // get datas from db
             .then((response) => {
-              // this.data.value = response.data.value
-              // this.data.question = response.data.question
-              console.log(response.data.question);
-              // this.pushIntoArray(response.data.value, dataLabel)
-              // this.pushIntoArray(response.data.count, dataCount)
-              this.getChartDoughnut(response.data.count,response.data.value, response.data.question)
-    
-                this.dataState = true; // if datas is return from db then it will be true
+              this.getChartPie(response.data.count,response.data.value, response.data.question)
+              this.data.question =response.data.question,
+              this.dataState = true; // if datas is return from db then it will be true
             })
             .catch((error) => { // catch error
                console.log(error)
                 this.dataState = false; // if error is return from db then it will be false
             });
         },
-    
-        pushIntoArray(array, store ){
-          array.forEach(element => {
-            // console.log(element);
-            store.push(element)
-          });
-        },
-        getChartDoughnut(doughnutData, label,title ){
+        getChartPie(pieData, label,title ){
+          console.log(title)
           const ctx = document.getElementById(this.canvaId);
           const data = {
           labels: label,
           datasets: [{
             label: title,
-            data: doughnutData,
+            data: pieData,
             backgroundColor: [
               'rgb(255, 99, 132)',
               'rgb(54, 162, 235)',
@@ -77,7 +57,7 @@
           }]
         };
         const myChart = new Chart(ctx, {
-          type: 'doughnut',
+          type: 'pie',
           data: data,
     });
         }
@@ -86,8 +66,12 @@
     }
     </script>
     <template>
+    <article>
+      <h3>{{this.data.question}}</h3>
       <div style="margin: auto 20%;">
         <canvas :id=this.canvaId></canvas>
       </div>
+    </article>
+        
       
       </template>

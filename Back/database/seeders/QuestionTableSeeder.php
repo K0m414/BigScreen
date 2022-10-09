@@ -38,7 +38,7 @@ class QuestionTableSeeder extends Seeder
             [ 
                 'question'=>'Nombre de personne dans votre foyer (adulte & enfants)',
                 'question_type'=>'C',
-                'answer_choice'=>'1, 2, 3, 4, 5',
+                'answer_choice'=>' 1, 2, 3, 4, 5',
                 'survey_id'=>1
             ],
             [ 
@@ -67,43 +67,43 @@ class QuestionTableSeeder extends Seeder
             ],
             [ 
                 'question'=>'Au sein de votre foyer, combien de personnes utilisent votre casque VR pour regarder Bigscreen ?',
-                'question_type'=>'C','answer_choice'=>'1, 2, 3, 4, 5',
+                'question_type'=>'C','answer_choice'=>' 1, 2, 3, 4, 5',
                 'survey_id'=>1
             ],
             [ 
                 'question'=>'Vous utilisez principalement Bigscreen pour',
                 'question_type'=>'A',
-                'answer_choice'=>'egarder la TV en direct, regarder des films, travailler, jouer en solo, jouer en équipe',
+                'answer_choice'=>'regarder la TV en direct, regarder des films, travailler, jouer en solo, jouer en équipe',
                 'survey_id'=>1
             ],
             [ 
                 'question'=>'Combien donnez-vous de point pour la qualité de l’image sur Bigscreen ?',
                 'question_type'=>'C',
-                'answer_choice'=>'1, 2, 3, 4, 5',
+                'answer_choice'=>' 1, 2, 3, 4, 5',
                 'survey_id'=>1
             ],
             [ 
                 'question'=>'Combien donnez-vous de point pour le confort d’utilisation de l’interface Bigscreen ?',
                 'question_type'=>'C',
-                'answer_choice'=>'1, 2, 3, 4, 5',
+                'answer_choice'=>' 1, 2, 3, 4, 5',
                 'survey_id'=>1
             ],
             [ 
                 'question'=>'Combien donnez-vous de point pour la connexion réseau de Bigscreen ?',
                 'question_type'=>'C',
-                'answer_choice'=>'1, 2, 3, 4, 5',
+                'answer_choice'=>' 1, 2, 3, 4, 5',
                 'survey_id'=>1
             ],
             [ 
                 'question'=>'Combien donnez-vous de point pour la qualité des graphismes 3D dans Bigscreen ?',
                 'question_type'=>'C',
-                'answer_choice'=>'1, 2, 3, 4, 5',
+                'answer_choice'=>' 1, 2, 3, 4, 5',
                 'survey_id'=>1
             ],
             [ 
                 'question'=>'Combien donnez-vous de point pour la qualité audio dans Bigscreen ?',
                 'question_type'=>'C',
-                'answer_choice'=>'1, 2, 3, 4, 5',
+                'answer_choice'=>' 1, 2, 3, 4, 5',
                 'survey_id'=>1
             ],
             [ 
@@ -121,13 +121,13 @@ class QuestionTableSeeder extends Seeder
             [ 
                 'question'=>'Aimeriez vous pouvoir enregistrer des émissions TV pour pouvoir les regarder ultérieurement ?',
                 'question_type'=>'C',
-                'answer_choice'=>'1, 2, 3, 4, 5',
+                'answer_choice'=>' 1, 2, 3, 4, 5',
                 'survey_id'=>1
             ],
             [ 
                 'question'=>'Aimeriez-vous jouer à des jeux exclusifs sur votre Bigscreen ?',
                 'question_type'=>'C',
-                'answer_choice'=>'1, 2, 3, 4, 5',
+                'answer_choice'=>' 1, 2, 3, 4, 5',
                 'survey_id'=>1
             ],
             [ 

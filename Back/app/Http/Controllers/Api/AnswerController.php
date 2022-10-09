@@ -8,6 +8,8 @@ use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Guest;
+use Illuminate\Support\Facades\Validator;
+
 
 class AnswerController extends Controller
 {
@@ -46,64 +48,80 @@ class AnswerController extends Controller
      */
     public function store(Request $request)
     {
-        // $this->validate($request, [
-        //     'email'=> 'required|email',
-        // ]);
-        // search the email from the request
-        $guestEmail = implode('"email" =>', $request->only(['email'])) ;
-        //with the email find the id
-        $guestId = Guest::all()->where("email", $guestEmail)->pluck("id")->implode('0 => ', );
-        $link = Guest::all()->where("email", $guestEmail)->pluck("link")->implode('0 => ', );
+        $validator = Validator::make(
 
-        //create a unique id
-
-        // if the id is find
-        if($guestId){
-            //then create an answer in the answer table
-            $answer = Answer::create([
-                'answer' => $request->answer,
-                'question_id' => $request->question_id,
-                'guest_id' => $guestId,
-            ]);
-            return response()->json([
-                'status' => true,
-                'message'=>"Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
-                votre investissement, nous vous préparons une application toujours plus
-                facile à utiliser, seul ou en famille. <br>
-                Si vous désirez consulter vos réponse ultérieurement, vous pouvez consultez
-                cette adresse:",
-                'link'=> $link,
-            ],200); 
-        }
-        //the id is null 
-        else{
-            $link = Str::uuid()->toString();
-            // create a guest
-            $guest = Guest::create([
-                'email' => $request->email,
-                'link' => $link,
-            ]);
-            // search the new guest id
+            $request->all(),
+            [
+                'email'=> 'required|email',//check if email is ok
+            ]
+        );
+        if ($validator->fails()) {
+            return response()->json(
+                [
+                    "status" => "401",
+                    "errors" => $validator->errors()
+                ],
+                401
+            );
+        } else {
+            $guestEmail = implode('"email" =>', $request->only(['email'])) ;
+            //with the email find the id
             $guestId = Guest::all()->where("email", $guestEmail)->pluck("id")->implode('0 => ', );
-            // dd($guestId);
-            //then create an answer in the answer table
-            $answer = Answer::create([
-                'answer' => $request->answer,
-                'question_id' => $request->question_id,
-                'guest_id' => $guestId,
-            ]);
-
-            return response()->json([
-                'status' => true,
-                'message'=>"Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
-                votre investissement, nous vous préparons une application toujours plus
-                facile à utiliser, seul ou en famille. <br>
-                Si vous désirez consulter vos réponse ultérieurement, vous pouvez consultez
-                cette adresse:",
-                'link'=> $link,
-            ],200);              
+            $link = Guest::all()->where("email", $guestEmail)->pluck("link")->implode('0 => ', );
+    
+            //create a unique id
+    
+            // if the id is find
+            if($guestId){
+                //then create an answer in the answer table
+                $answer = Answer::create([
+                    'answer' => $request->answer,
+                    'question_id' => $request->question_id,
+                    'guest_id' => $guestId,
+                ]);
+                return response()->json([
+                    'status' => true,
+                    'message'=>"Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
+                    votre investissement, nous vous préparons une application toujours plus
+                    facile à utiliser, seul ou en famille.
+                    Si vous désirez consulter vos réponse ultérieurement, vous pouvez consultez
+                    cette adresse:",
+                    'link'=> $link,
+                ],200); 
+            }
+            //the id is null 
+            else{
+                $link = Str::uuid()->toString();
+                // create a guest
+                $guest = Guest::create([
+                    'email' => $request->email,
+                    'link' => $link,
+                ]);
+                // search the new guest id
+                $guestId = Guest::all()->where("email", $guestEmail)->pluck("id")->implode('0 => ', );
+                // dd($guestId);
+                //then create an answer in the answer table
+                $answer = Answer::create([
+                    'answer' => $request->answer,
+                    'question_id' => $request->question_id,
+                    'guest_id' => $guestId,
+                ]);
+    
+                return response()->json([
+                    'status' => true,
+                    'message'=>"Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
+                    votre investissement, nous vous préparons une application toujours plus
+                    facile à utiliser, seul ou en famille.
+                    Si vous désirez consulter vos réponse ultérieurement, vous pouvez consultez
+                    cette adresse:",
+                    'link'=> $link,
+                ],200);              
+    
+            }
+            
 
         }
+        // search the email from the request
         
     }
     public function show($id)
@@ -116,7 +134,7 @@ class AnswerController extends Controller
             'answer'=> $answer
         ],200); 
     }
-    protected function getDoughnutChart($id)
+    protected function getPieChart($id)
     {
         // check if id = question type a
         $answers =Answer::all()->where('question_id', $id)->groupBy('answer'); // all answer where question_id = $id are group by answer
