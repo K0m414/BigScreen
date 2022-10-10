@@ -19,12 +19,12 @@
             }
         },
         mounted() { // call when the page is loaded
-            this.searchQuestions(questionsURL);
-            this.searchAnswers(answerURL+link);
+            this.getQuestions(questionsURL);
+            this.getAnswers(answerURL+link);
             
         },
         methods: {
-            searchQuestions(URL){
+            getQuestions(URL){
                 axios.get(URL)
                 .then((response) => { 
                     this.data.question = response.data.questions;
@@ -34,7 +34,7 @@
                     this.dataState = false; 
                 })
             },
-            searchAnswers(URL){
+            getAnswers(URL){
                 axios.get(URL) // get datas from db
                 .then((response) => { // datas get is in response
                 this.data.answer = response.data.data.answer;
@@ -62,12 +62,12 @@
             </thead >
             <tbody>
                 <tr>
-                    <td scope="row">question n° 1/20 </td>
+                    <td scope="row">Question n° 1/20 </td>
                     <td scope="row">{{ this.data.question[0].question }}</td>
                     <td scope="row">{{this.data.email}}</td>
                 </tr>
                 <tr v-if="this.dataState" v-for="(answer, index) in this.data.answer" :key="index">
-                    <td scope="row">question n° {{ this.data.question_id[index] }}/20</td>
+                    <td scope="row">Question n° {{ this.data.question_id[index] }}/20</td>
                     <td scope="row">{{ this.data.question[index+1].question }}</td>
                     <td scope="row">{{ answer }}</td>
                 </tr>
